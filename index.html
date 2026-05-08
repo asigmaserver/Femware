@@ -3,330 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Femware | The Ultimate Pink Executor v1.32</title>
+    <title>FEMWARE ELITE | v1.32 | The Unmatched Pink Standard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --pink-primary: #ff71ce;
+            --pink-secondary: #ff007f;
+            --pink-glow: rgba(255, 113, 206, 0.4);
+        }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #050505;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #030303;
             color: #ffffff;
+            overflow-x: hidden;
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
         }
-        .glass-card:hover {
-            border-color: #ec4899;
-            transform: translateY(-5px);
+        .pink-gradient {
+            background: linear-gradient(135deg, var(--pink-primary) 0%, var(--pink-secondary) 100%);
         }
-        .gradient-text {
-            background: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
+        .text-gradient {
+            background: linear-gradient(135deg, var(--pink-primary) 0%, #fff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .btn-primary {
-            background: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
-            transition: all 0.3s ease;
+        .float {
+            animation: float 6s ease-in-out infinite;
         }
-        .btn-primary:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(244, 114, 182, 0.4);
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            align-items: center;
-            justify-content: center;
+        .glow-button {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 0 rgba(255, 113, 206, 0);
         }
-        .modal.active {
-            display: flex;
+        .glow-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 10px 30px var(--pink-glow);
         }
-        .pink-glow {
-            box-shadow: 0 0 30px rgba(244, 114, 182, 0.2);
+        .coming-soon {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            cursor: not-allowed;
         }
-        /* Custom scrollbar for that pro feel */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
         }
-        ::-webkit-scrollbar-track {
-            background: #050505;
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
-        ::-webkit-scrollbar-thumb {
-            background: #db2777;
-            border-radius: 10px;
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.2;
         }
     </style>
 </head>
-<body class="antialiased overflow-x-hidden">
+<body class="antialiased">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 px-6 py-4 bg-[#050505]/80 backdrop-blur-md border-b border-white/5">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <img src="https://sc01.alicdn.com/kf/A32cf7b0dbe3c45a3a363389a27852140b.png" alt="Femware Logo" class="w-10 h-10 rounded-lg pink-glow">
-                <span class="text-xl font-bold tracking-tighter uppercase">Fem<span class="text-pink-500">ware</span></span>
+    <!-- Background Orbs -->
+    <div class="orb w-[500px] h-[500px] bg-pink-500 top-[-100px] left-[-100px] animate-pulse"></div>
+    <div class="orb w-[400px] h-[400px] bg-purple-600 bottom-[10% ] right-[-50px] delay-1000"></div>
+
+    <!-- Nav -->
+    <nav class="fixed w-full z-[100] px-8 py-6 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center glass rounded-2xl px-8 py-4 border-white/10 shadow-2xl">
+            <div class="flex items-center gap-4">
+                <img src="https://sc01.alicdn.com/kf/A32cf7b0dbe3c45a3a363389a27852140b.png" alt="Logo" class="w-10 h-10 rounded-xl pink-glow">
+                <span class="text-2xl font-black tracking-tighter uppercase italic">Fem<span class="text-pink-500">ware</span></span>
             </div>
-            <div class="hidden md:flex gap-8 font-medium text-gray-400">
-                <a href="#features" class="hover:text-pink-400 transition">Features</a>
-                <a href="#plans" class="hover:text-pink-400 transition">Plans</a>
-                <a href="#how-to" class="hover:text-pink-400 transition">Installation</a>
-                <a href="#faq" class="hover:text-pink-400 transition">FAQ</a>
+            <div class="hidden lg:flex gap-10 font-bold text-sm tracking-widest text-gray-400 uppercase">
+                <a href="#about" class="hover:text-pink-400 transition">Evolution</a>
+                <a href="#features" class="hover:text-pink-400 transition">Tech</a>
+                <a href="#pricing" class="hover:text-pink-400 transition">Access</a>
+                <a href="#discord" class="hover:text-pink-400 transition">Network</a>
             </div>
-            <a href="https://discord.gg/7pMQ9vuKJM" target="_blank" class="btn-primary px-6 py-2 rounded-full font-semibold text-white shadow-lg">Join Discord</a>
+            <a href="https://discord.gg/7pMQ9vuKJM" target="_blank" class="pink-gradient px-8 py-3 rounded-xl font-extrabold text-sm uppercase tracking-widest glow-button shadow-lg">Join Discord</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 px-6 overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-pink-600/10 blur-[120px] rounded-full pointer-events-none"></div>
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-pink-500/10 border border-pink-500/20 text-sm font-medium text-pink-400">
-                ✨ Version 1.32 is now live and stable!
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center pt-20 px-8">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div class="scroll-reveal" id="hero-text">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 text-xs font-bold uppercase tracking-widest mb-8">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-pink-500"></span>
+                    </span>
+                    The Next Evolution: v1.32 Stable
+                </div>
+                <h1 class="text-7xl md:text-9xl font-black leading-[0.9] mb-8 tracking-tighter">
+                    THE <span class="text-gradient">PINK</span><br>SUPREMACY.
+                </h1>
+                <p class="text-xl text-gray-400 leading-relaxed mb-12 max-w-lg font-medium">
+                    Bypass limits. Execute perfection. Femware isn't just a tool; it's the god-tier standard for elite performance and unmatched stability.
+                </p>
+                <div class="flex flex-wrap gap-6">
+                    <button class="coming-soon px-12 py-5 rounded-2xl font-black text-lg text-gray-500 flex items-center gap-3">
+                        <i class="fas fa-lock"></i> Coming Soon
+                    </button>
+                    <a href="https://discord.gg/7pMQ9vuKJM" target="_blank" class="border border-white/10 bg-white/5 hover:bg-white/10 px-12 py-5 rounded-2xl font-black text-lg transition flex items-center gap-3">
+                        <i class="fab fa-discord text-pink-500"></i> Support
+                    </a>
+                </div>
             </div>
-            <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-tight">
-                The Best <span class="gradient-text">Pink</span> Executor
-            </h1>
-            <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-                Femware is built for performance, reliability, and aesthetics. Start for free today or upgrade to Premium for a lifetime of ad-free execution.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button onclick="openModal('tos-modal')" class="btn-primary px-10 py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 text-white">
-                    <i class="fas fa-download"></i> Download Free
-                </button>
-                <a href="#plans" class="bg-white/5 hover:bg-white/10 border border-white/10 px-10 py-4 rounded-xl font-bold text-lg transition">
-                    View Pricing
-                </a>
-            </div>
-            <div class="mt-16 relative group">
-                <div class="absolute -inset-1 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
-                <div class="relative rounded-2xl border border-white/10 bg-[#0a0a0a] overflow-hidden shadow-2xl">
-                    <img src="https://sc01.alicdn.com/kf/Ad80c8f83db844cbdbe5ff49c93838cc2t.png" alt="Femware UI Preview" class="w-full h-auto">
+            <div class="relative float scroll-reveal">
+                <div class="absolute -inset-4 bg-pink-500/20 blur-[100px] rounded-full"></div>
+                <div class="glass p-4 rounded-[40px] border-white/10 shadow-2xl relative overflow-hidden">
+                    <img src="https://sc01.alicdn.com/kf/Ad80c8f83db844cbdbe5ff49c93838cc2t.png" alt="Femware Interface" class="rounded-[30px] w-full">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Plans Section -->
-    <section id="plans" class="py-24 px-6 bg-[#080808]">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4 uppercase tracking-tighter">Choose Your Path</h2>
-                <p class="text-gray-400">Flexible options for every elite user</p>
+    <!-- Comparison: Why we are 100x better -->
+    <section id="about" class="py-32 px-8 bg-[#050505] relative overflow-hidden">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-24 scroll-reveal">
+                <h2 class="text-5xl font-black mb-6 uppercase tracking-tighter italic">Why Femware?</h2>
+                <p class="text-gray-500 text-lg uppercase tracking-widest font-bold">100x Performance. 100x Style.</p>
             </div>
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- Free Plan -->
-                <div class="glass-card p-10 rounded-3xl flex flex-col h-full border-white/5">
-                    <div class="mb-8">
-                        <span class="text-pink-400 font-bold uppercase tracking-widest text-sm">Basic</span>
-                        <h3 class="text-3xl font-bold mt-2">Free</h3>
-                        <p class="text-4xl font-black mt-4">$0 <span class="text-lg font-normal text-gray-500">/ forever</span></p>
-                    </div>
-                    <ul class="space-y-4 mb-10 flex-grow">
-                        <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check-circle text-pink-500"></i> Full Execution Support</li>
-                        <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check-circle text-pink-500"></i> v1.32 Stability</li>
-                        <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check-circle text-pink-500"></i> Discord Support</li>
-                        <li class="flex items-center gap-3 text-gray-400"><i class="fas fa-clock text-gray-600"></i> Ad-Supported Keys</li>
+            <div class="grid md:grid-cols-2 gap-8 scroll-reveal">
+                <div class="glass p-12 rounded-[40px] border-white/5">
+                    <h3 class="text-2xl font-bold mb-8 text-gray-500 uppercase tracking-widest">The Others</h3>
+                    <ul class="space-y-6">
+                        <li class="flex items-center gap-4 text-gray-600"><i class="fas fa-times-circle text-red-900"></i> Basic Injection</li>
+                        <li class="flex items-center gap-4 text-gray-600"><i class="fas fa-times-circle text-red-900"></i> Frequent Crashes</li>
+                        <li class="flex items-center gap-4 text-gray-600"><i class="fas fa-times-circle text-red-900"></i> Outdated Bypasses</li>
+                        <li class="flex items-center gap-4 text-gray-600"><i class="fas fa-times-circle text-red-900"></i> Boring Blue UI</li>
                     </ul>
-                    <button onclick="openModal('tos-modal')" class="w-full py-4 rounded-xl bg-white/5 border border-white/10 font-bold hover:bg-white/10 transition">Get Started</button>
+                </div>
+                <div class="pink-gradient p-12 rounded-[40px] shadow-2xl shadow-pink-500/20 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8 opacity-10 text-9xl font-black">100X</div>
+                    <h3 class="text-2xl font-bold mb-8 text-white uppercase tracking-widest">Femware v1.32</h3>
+                    <ul class="space-y-6">
+                        <li class="flex items-center gap-4 font-bold"><i class="fas fa-check-circle"></i> God-Tier Stealth Engine</li>
+                        <li class="flex items-center gap-4 font-bold"><i class="fas fa-check-circle"></i> 99.9% Injection Success</li>
+                        <li class="flex items-center gap-4 font-bold"><i class="fas fa-check-circle"></i> Hyper-Optimized DLL</li>
+                        <li class="flex items-center gap-4 font-bold"><i class="fas fa-check-circle"></i> Gorgeous Pink Aesthetic</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="py-32 px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Free -->
+                <div class="glass p-12 rounded-[40px] border-white/5 flex flex-col scroll-reveal">
+                    <div class="mb-12">
+                        <span class="text-gray-500 font-bold uppercase text-xs tracking-[0.3em]">Tier 01</span>
+                        <h4 class="text-4xl font-black mt-2">FREE</h4>
+                    </div>
+                    <ul class="space-y-6 mb-12 flex-grow font-medium text-gray-400">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-pink-500"></i> Standard Bypasses</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-pink-500"></i> v1.32 Engine</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-pink-500"></i> Ad-Supported Key</li>
+                    </ul>
+                    <button class="coming-soon w-full py-5 rounded-2xl font-black text-gray-500">COMING SOON</button>
                 </div>
 
-                <!-- Premium Plan -->
-                <div class="glass-card p-10 rounded-3xl border-pink-500/30 ring-2 ring-pink-500/10 flex flex-col h-full bg-pink-500/[0.02]">
-                    <div class="mb-8">
-                        <div class="flex justify-between items-start">
-                            <span class="text-pink-400 font-bold uppercase tracking-widest text-sm">Most Popular</span>
-                            <span class="bg-pink-500 text-xs font-bold px-3 py-1 rounded-full text-white">ELITE</span>
+                <!-- Premium - HIGHLIGHTED -->
+                <div class="pink-gradient p-1 rounded-[40px] shadow-2xl shadow-pink-500/20 scroll-reveal">
+                    <div class="bg-[#0a0a0a] rounded-[39px] p-12 h-full flex flex-col relative overflow-hidden">
+                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-pink-500/20 blur-3xl rounded-full"></div>
+                        <div class="mb-12">
+                            <span class="text-pink-500 font-bold uppercase text-xs tracking-[0.3em]">Tier 02 - Elite</span>
+                            <h4 class="text-4xl font-black mt-2">PREMIUM</h4>
+                            <div class="text-5xl font-black mt-6">$24.99 <span class="text-sm font-bold text-gray-500 uppercase tracking-widest">/ Lifetime</span></div>
                         </div>
-                        <h3 class="text-3xl font-bold mt-2 text-pink-400">Premium</h3>
-                        <p class="text-4xl font-black mt-4">$24.99 <span class="text-lg font-normal text-gray-500">/ lifetime</span></p>
+                        <ul class="space-y-6 mb-12 flex-grow font-bold text-gray-200">
+                            <li class="flex items-center gap-3"><i class="fas fa-star text-pink-500"></i> ZERO Key System</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-star text-pink-500"></i> VIP Stealth Mode</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-star text-pink-500"></i> Private Discord Access</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-star text-pink-500"></i> Lifetime HWID Resets</li>
+                        </ul>
+                        <a href="https://discord.gg/7pMQ9vuKJM" target="_blank" class="pink-gradient w-full py-5 rounded-2xl font-black text-center glow-button">BUY ON DISCORD SERVER</a>
                     </div>
-                    <ul class="space-y-4 mb-10 flex-grow">
-                        <li class="flex items-center gap-3 text-gray-200"><i class="fas fa-check-circle text-pink-500"></i> <span class="font-bold">No Key System</span></li>
-                        <li class="flex items-center gap-3 text-gray-200"><i class="fas fa-check-circle text-pink-500"></i> Ad-Free Experience</li>
-                        <li class="flex items-center gap-3 text-gray-200"><i class="fas fa-check-circle text-pink-500"></i> Priority HWID Resets</li>
-                        <li class="flex items-center gap-3 text-gray-200"><i class="fas fa-check-circle text-pink-500"></i> Exclusive Beta Access</li>
-                    </ul>
-                    <button class="btn-primary w-full py-4 rounded-xl font-bold text-white shadow-lg">Upgrade to Premium</button>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Stats Section -->
-    <section class="py-20 px-6 border-y border-white/5">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div class="text-center">
-                <div class="text-4xl font-black text-pink-500 mb-2">10K+</div>
-                <div class="text-gray-400 uppercase tracking-widest text-xs font-bold">Active Users</div>
-            </div>
-            <div class="text-center">
-                <div class="text-4xl font-black text-pink-500 mb-2">v1.32</div>
-                <div class="text-gray-400 uppercase tracking-widest text-xs font-bold">Latest Build</div>
-            </div>
-            <div class="text-center">
-                <div class="text-4xl font-black text-pink-500 mb-2">24/7</div>
-                <div class="text-gray-400 uppercase tracking-widest text-xs font-bold">Live Support</div>
-            </div>
-            <div class="text-center">
-                <div class="text-4xl font-black text-pink-500 mb-2">100%</div>
-                <div class="text-gray-400 uppercase tracking-widest text-xs font-bold">Safe & Clean</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="py-24 px-6 relative">
-        <div class="absolute top-1/2 right-0 -translate-y-1/2 w-96 h-96 bg-pink-600/5 blur-[100px] pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4 uppercase">Everything You Need</h2>
-                <p class="text-gray-400">Optimized for speed, themed for aesthetic</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="glass-card p-8 rounded-2xl">
-                    <div class="w-12 h-12 bg-pink-500/10 rounded-xl flex items-center justify-center text-pink-500 text-xl mb-6">
-                        <i class="fas fa-bolt"></i>
+                <!-- Custom/Info -->
+                <div class="glass p-12 rounded-[40px] border-white/5 flex flex-col scroll-reveal">
+                    <div class="mb-12 text-center py-8">
+                        <i class="fas fa-users text-6xl text-pink-500 mb-6"></i>
+                        <h4 class="text-3xl font-black uppercase">10,000+</h4>
+                        <p class="text-gray-500 font-bold uppercase text-xs tracking-[0.3em] mt-2">Elite Users</p>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">Lightning Fast</h4>
-                    <p class="text-gray-400 leading-relaxed">Execute your favorite scripts in milliseconds with our high-performance engine.</p>
-                </div>
-                <div class="glass-card p-8 rounded-2xl">
-                    <div class="w-12 h-12 bg-pink-500/10 rounded-xl flex items-center justify-center text-pink-500 text-xl mb-6">
-                        <i class="fas fa-eye-slash"></i>
+                    <div class="p-8 bg-white/5 rounded-3xl border border-white/5 mb-8">
+                        <p class="text-sm text-gray-400 leading-relaxed font-medium italic">
+                            "Femware v1.32 is the most stable release I've ever used. The pink theme is just the cherry on top."
+                        </p>
+                        <div class="mt-4 font-black text-pink-500 text-xs tracking-widest">— Top User</div>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">Undetected</h4>
-                    <p class="text-gray-400 leading-relaxed">Stay under the radar with our advanced bypasses and custom injector technology.</p>
+                    <a href="https://discord.gg/7pMQ9vuKJM" target="_blank" class="w-full py-5 rounded-2xl bg-white/5 border border-white/10 font-black text-center hover:bg-white/10 transition">JOIN THE FAMILY</a>
                 </div>
-                <div class="glass-card p-8 rounded-2xl">
-                    <div class="w-12 h-12 bg-pink-500/10 rounded-xl flex items-center justify-center text-pink-500 text-xl mb-6">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3">Aesthetic UI</h4>
-                    <p class="text-gray-400 leading-relaxed">A beautiful, clean, and intuitive interface designed to enhance your experience.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final CTA -->
-    <section class="py-24 px-6 text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-pink-600/5 blur-[120px] rounded-full pointer-events-none"></div>
-        <div class="max-w-4xl mx-auto relative z-10">
-            <h2 class="text-5xl font-black mb-6 uppercase tracking-tighter">Join the Femware Elite</h2>
-            <p class="text-gray-400 mb-10 text-lg">Download version 1.32 and experience the future of execution.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://discord.gg/7pMQ9vuKJM" class="bg-[#5865F2] hover:bg-[#4752c4] px-10 py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition text-white shadow-lg">
-                    <i class="fab fa-discord"></i> Join Discord
-                </a>
-                <button onclick="openModal('tos-modal')" class="btn-primary px-10 py-4 rounded-xl font-bold text-white shadow-lg">Download Femware</button>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-white/5 bg-[#050505]">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-3">
-                <img src="https://sc01.alicdn.com/kf/A32cf7b0dbe3c45a3a363389a27852140b.png" alt="Logo" class="w-8 h-8 opacity-70">
-                <span class="font-bold tracking-tighter uppercase">Femware v1.32</span>
+    <footer class="py-20 px-8 border-t border-white/5 relative bg-[#030303]">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+            <div>
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="https://sc01.alicdn.com/kf/A32cf7b0dbe3c45a3a363389a27852140b.png" alt="Logo" class="w-8 h-8 opacity-50">
+                    <span class="text-xl font-black tracking-tighter uppercase italic opacity-50">Femware</span>
+                </div>
+                <p class="text-gray-600 text-sm font-bold uppercase tracking-widest">© 2026 The Elite Standard. All Rights Reserved.</p>
             </div>
-            <p class="text-gray-600 text-xs">© 2026 Femware Development. All rights reserved.</p>
+            <div class="flex gap-12 text-gray-500 font-black text-xs uppercase tracking-widest">
+                <a href="#" class="hover:text-pink-500 transition">Terms</a>
+                <a href="#" class="hover:text-pink-500 transition">Privacy</a>
+                <a href="https://discord.gg/7pMQ9vuKJM" target="_blank" class="hover:text-pink-500 transition">Discord</a>
+            </div>
         </div>
     </footer>
 
-    <!-- MODALS -->
-
-    <!-- TOS Modal -->
-    <div id="tos-modal" class="modal px-4">
-        <div class="glass-card bg-[#0a0a0a] w-full max-w-lg rounded-3xl p-8 relative">
-            <button onclick="closeModal('tos-modal')" class="absolute top-6 right-6 text-gray-500 hover:text-white text-xl"><i class="fas fa-times"></i></button>
-            <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
-                <i class="fas fa-file-contract text-pink-500"></i> Terms of Service
-            </h3>
-            <div class="text-gray-400 text-sm space-y-4 mb-8 max-h-48 overflow-y-auto pr-2">
-                <p>Please read and accept our Terms of Service before downloading Femware.</p>
-                <div class="p-4 bg-white/5 rounded-xl border border-white/10">
-                    <div class="flex justify-between mb-2">
-                        <span>Femware Version:</span>
-                        <span class="text-pink-400">1.32</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Status:</span>
-                        <span class="text-green-400">Operational</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex items-center gap-3 mb-8 cursor-pointer group" onclick="toggleCheckbox()">
-                <div id="checkbox" class="w-6 h-6 border-2 border-white/10 rounded-md flex items-center justify-center group-hover:border-pink-500 transition-colors">
-                    <i class="fas fa-check text-pink-500 opacity-0 transition-opacity"></i>
-                </div>
-                <span class="text-sm font-medium text-gray-300">I have read and accept the Terms of Service</span>
-            </div>
-            <button id="continue-btn" disabled onclick="closeModal('tos-modal'); openModal('download-modal')" class="w-full py-4 rounded-xl bg-gray-800 text-gray-500 font-bold cursor-not-allowed transition-all">Continue</button>
-        </div>
-    </div>
-
-    <!-- Download Modal -->
-    <div id="download-modal" class="modal px-4">
-        <div class="glass-card bg-[#0a0a0a] w-full max-w-lg rounded-3xl p-10 text-center relative">
-            <button onclick="closeModal('download-modal')" class="absolute top-6 right-6 text-gray-500 hover:text-white text-xl"><i class="fas fa-times"></i></button>
-            <div class="w-20 h-20 bg-pink-500/20 text-pink-500 rounded-full flex items-center justify-center text-4xl mx-auto mb-6 animate-pulse">
-                <i class="fas fa-heart"></i>
-            </div>
-            <h3 class="text-3xl font-black mb-4">Download Started</h3>
-            <p class="text-gray-400 mb-8">Your Femware v1.32 download is starting. Stay elite!</p>
-            <a href="#" class="text-pink-400 font-bold hover:underline">Download didn't start? Click here</a>
-        </div>
-    </div>
-
     <script>
-        function openModal(id) {
-            document.getElementById(id).classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+        // Scroll Reveal Logic
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
 
-        let accepted = false;
-        function toggleCheckbox() {
-            accepted = !accepted;
-            const checkIcon = document.querySelector('#checkbox i');
-            const box = document.querySelector('#checkbox');
-            const btn = document.getElementById('continue-btn');
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
 
-            if (accepted) {
-                checkIcon.classList.remove('opacity-0');
-                box.classList.add('border-pink-500', 'bg-pink-500/10');
-                btn.disabled = false;
-                btn.classList.remove('bg-gray-800', 'text-gray-500', 'cursor-not-allowed');
-                btn.classList.add('btn-primary', 'text-white', 'cursor-pointer', 'shadow-lg');
+        // Navbar Blur on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-6');
             } else {
-                checkIcon.classList.add('opacity-0');
-                box.classList.remove('border-pink-500', 'bg-pink-500/10');
-                btn.disabled = true;
-                btn.classList.add('bg-gray-800', 'text-gray-500', 'cursor-not-allowed');
-                btn.classList.remove('btn-primary', 'text-white', 'cursor-pointer', 'shadow-lg');
+                nav.classList.add('py-6');
+                nav.classList.remove('py-4');
             }
-        }
-
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        }
+        });
     </script>
 </body>
 </html>
